@@ -6,17 +6,19 @@ import MainPage from './MainPage';
 import './index.css';
 
 function Root() {
-  const [ user, setUser ] = useState(null);
-  const login = (user) => setUser(user);
+  const [user, setUser ] = useState(null);
+  const login = user => setUser(user);
   const logout = () => setUser(null);
 
-  return user ? (
-    <UserContext.Provider value={user}>
-      <MainPage onLogout={logout} />
-    </UserContext.Provider>
-  ) : (
-    <LoginPage onLogin={login} />
-  )
-};
+  const userObject = { user, login, logout }
+
+  return <UserContext.Provider value={userObject}>
+      {userObject ? (
+        <MainPage />
+      ) : (
+        <LoginPage />
+      )}
+  </UserContext.Provider>
+}
 
 ReactDOM.render(<Root />, document.querySelector('#root'));

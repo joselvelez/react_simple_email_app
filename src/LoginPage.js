@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import UserContext from './UserContext';
 import { login } from './api';
 
-function LoginPage({ onLogin }) {
+function LoginPage() {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const { login: onLogin } = useContext(UserContext);
 
     const submit = event => {
         event.preventDefault();
