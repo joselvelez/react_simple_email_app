@@ -10,10 +10,10 @@ function Root() {
   const login = user => setUser(user);
   const logout = () => setUser(null);
 
-  const userObject = { user, login, logout }
+  const userObject = { user, login, logout };
 
   return <UserContext.Provider value={userObject}>
-      {userObject ? (
+      {user ? (
         <MainPage />
       ) : (
         <LoginPage />
