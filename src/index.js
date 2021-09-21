@@ -1,24 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import ReactDOM from 'react-dom';
-import UserContext from './UserContext';
+import UserContext, { UserProvider } from './UserContext';
 import LoginPage from './LoginPage';
 import MainPage from './MainPage';
 import './index.css';
 
 function Root() {
-  const [user, setUser ] = useState(null);
-  const login = user => setUser(user);
-  const logout = () => setUser(null);
-
-  const userObject = { user, login, logout };
-
-  return <UserContext.Provider value={userObject}>
-      {user ? (
-        <MainPage />
-      ) : (
-        <LoginPage />
-      )}
-  </UserContext.Provider>
+  const { user } = useContext(UserContext);
+  return (
+    user ? <MainPage /> : <LoginPage />
+  )
 }
 
-ReactDOM.render(<Root />, document.querySelector('#root'));
+ReactDOM.render(
+  <UserProvider>
+    <Root />
+  </UserProvider>,
+  document.querySelector('#root')
+);
