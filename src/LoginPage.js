@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react';
-import UserContext from './UserContext';
+import React, { useState } from 'react';
+import { useUserActions } from './UserContext';
 import { login } from './api';
 
 function LoginPage() {
@@ -7,7 +7,7 @@ function LoginPage() {
     const [loading, setLoading] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const { login: onLogin } = useContext(UserContext);
+    const { login: onLogin } = useUserActions();
 
     const submit = event => {
         event.preventDefault();

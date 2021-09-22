@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
-import UserContext from "./UserContext";
+import React, { useState, useEffect, useRef } from "react";
+import { useUser, useUserActions } from "./UserContext";
 
 const UserMenu = () => {
     const [isMenuVisible, setMenuVisible] = useState(false);
     const avatarRef = useRef();
-    const { user, logout: onLogout } = useContext(UserContext);
+    const user = useUser();
+    const { logout: onLogout } = useUserActions();
 
     const hideMenu = event => {
         // Ignore clicks on the avatar
